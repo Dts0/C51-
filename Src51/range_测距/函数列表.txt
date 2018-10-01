@@ -1,0 +1,5 @@
+uint range();//返回超声测距的距离mm
+
+sbit trig=P2^4;
+sbit echo=P2^5;
+//定义的超声测距部分的管脚

@@ -1,0 +1,7 @@
+sbit pwmPin=P3^7;
+//PWM信号管脚为P3^7
+
+void setPWM(uint pwm);
+//输入值为0-199,单位0.1ms
+代表在20ms的周期内高电平的0.1ms数
+或者说高电平占pwm/200

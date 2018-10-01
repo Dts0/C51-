@@ -1,0 +1,2 @@
+uchar leftHasAvoidance();//返回是否有障碍物
+uchar rightHasAvoidance();

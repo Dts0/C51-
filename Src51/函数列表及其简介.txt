@@ -1,0 +1,144 @@
+注：以下函数以从表层到底层的顺序排列
+
+
+/******************Mode模式选择模块***********************/
+/******************mode.h  mode.c***********************/
+void chooseMode(uchar mode);//标注：选择模式之后若要改变，只能重启
+//函数介绍：选择模式
+参数：
+_Test  测试模式，仅一直前进
+_AutoRun 自动避障模式（超声波）
+_FindeWay 循迹模式（要求运动轨迹用粗黑线绘制）
+_WifiControl wifi控制模式，使用wifi发送命令来控制小车运动
+
+隐藏函数(外部不可调用):
+void autoRun();
+//超声波自动避障的函数，如果要改变算法，需要改写该函数
+
+使用到的模块:
+红外避障模块，循迹模块，基础函数模块，测距模块，串口通信模块，wifi控制模块
+
+
+/******************循迹模块***********************/
+/*******************findWay.h findWay.c**********************/
+void findWay();
+//函数介绍：自动寻路
+注：内部循环while(1);
+
+定义：
+#define _findWay_interval 50
+两次判断之间的间隔,单位ms
+
+使用到的模块：
+红外避障模块，基础函数模块
+
+
+/******************红外避障模块***********************/
+/******************avoidance.h  avoidance.c***********************/
+uchar leftHasAvoidance();
+uchar rightHasAvoidance();
+//函数介绍：返回1或0表示左侧/右侧是否有障碍物
+
+使用到的模块：
+基础函数模块
+
+
+/******************PWM模拟信号模块***********************/
+/******************PWM.h  PWM.c***********************/
+void setPWM(uint pwm);
+//函数介绍：设置PWM占空比
+参数：
+pwm   占空比,0-199的整数，代表在20ms内输出为高电平的0.1ms数
+
+定义：
+sbit pwmPin=P3^7;//输出PWM信号的管脚
+
+主要用途：
+电机调速和控制舵机
+
+使用到的模块：
+基础函数模块，串口通信模块
+
+
+/******************测距模块***********************/
+/******************range.h  range.c***********************/
+uint range();
+//函数介绍：返回超声测距测得的距离,单位mm
+
+定义：
+sbit trig=P2^4;
+sbit echo=P2^5;
+//超声测距的信号管脚
+
+使用到的模块：
+基础函数模块
+
+
+
+/******************串口通信模块***********************/
+/******************serial.h  serial.c***********************/
+void serialBegin(int bits);//打开串口通信
+void serialPrint(uchar msg[]);//串口输出
+void serialPrintln(uchar msg[]);//串口输出，并且换行
+uchar* serialReceivedMsg();//返回串口接收到的字符串的首字母指针
+
+uchar* wifiReceivedMsg();//wifi模块需要使用的一个函数，这个并不希望用户调用
+
+参数：
+bits   比特率0xfd表示9600,其他请参考51的相关资料
+uchar msg[]   等价于字符串，需要串口输出的字符串
+
+定义：
+#define _stopFlag '\n'//接收信息的结尾标识符,注：仅接收消息
+#define _MaxSize 50//一次接收到信息的最大字节数
+
+extern  uchar _serialBegined=0;
+//全局变量，表示串口是否已经开启
+
+使用到的模块:
+C标准库中标准输入输出库stadio.h,C52管脚定义reg52.h
+
+
+/******************基础函数模块***********************/
+/******************functions.h  functions.c***********************/
+void delay(uint ms);//延时...ms
+
+void goFront();//前进
+void goBack();//后退
+void turnLeft();//原地左转
+void turnRight();//原地右转
+void stop();//停止
+void turnLeftAndGo();//前进左转
+void turnRightAndGo();//前进右转
+
+void Buze();//嗡鸣器滴响一声，参数可在functions.c中调
+void LEDnumber(uint num);//多段管显示十进制数字
+
+定义：
+#define uint unsigned int
+#define uchar unsigned char
+
+#define HIGH 1
+#define LOW 0
+
+#define TRUE 1
+#define FALSE 0
+
+#define _DEBUG//调试标志,定义时开启调试
+
+sbit left1_IN1=P1^0;//IN1
+sbit left1_IN2=P1^1;//IN2
+sbit left2_IN1=P1^2;//IN3
+sbit left2_IN2=P1^3;//IN4
+sbit right1_IN1=P1^4;//IN5
+sbit right1_IN2=P1^5;//IN6
+sbit right2_IN1=P1^6;//IN7
+sbit right2_IN2=P1^7;//IN8
+
+sbit SPK=P3^6;//嗡鸣器
+
+使用到的模块：
+reg52.h
+
+
+//end

@@ -1,0 +1,15 @@
+我所使用的wifi控制方法是使用手机提供的热点，使wifi模块连接至其上并连接到其中的服务器&接收该服务器中传过来的命令
+
+命令列表:
+#f----goFront前进
+#b----goBack后退
+#l----turnLeft左转
+#r----turnRight右转
+#e----turnLeftAndGo前进左转
+#i----turnRightAndGo前进右转
+#s----stop停止
+#u----Buze响喇叭
+#a----chooseMode(1)//auto自动
+
+
+注：如果要改变ip或端口,请自行到wifiInit()函数中修改

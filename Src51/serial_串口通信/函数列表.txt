@@ -1,0 +1,7 @@
+void serialBegin(int bits);//开始串口通信
+void serialPrint(uchar msg[]);//串口输出,结尾加终止符#表示结束本次输出，否则不跳出（即不执行之后的语句而是直接继续输出）
+void serialPrintln(uchar msg[]);
+uchar* serialReceivedMsg();//返回串口接收到的信息
+
+
+

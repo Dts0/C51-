@@ -1,0 +1,2 @@
+void wifiInit();//连接wifi以及接收信息，透传模式，用于初始化wifi模块
+void wifiControl();

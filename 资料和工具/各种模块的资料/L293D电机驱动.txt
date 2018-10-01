@@ -1,0 +1,8 @@
+EN1  IN1  IN2
+H    H    L     正转
+H    L    H     反转
+H    IN1,IN2相同 刹车
+L    /    /     停止
+
+Vss接控制电路
+Vs接动力电路

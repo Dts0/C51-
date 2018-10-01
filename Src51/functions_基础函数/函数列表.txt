@@ -1,0 +1,14 @@
+void delay(uint ms);
+
+void goFront();
+void goBack();
+void turnLeft();
+void turnRight();
+void stop();
+void turnLeftAndGo();
+void turnRightAndGo();
+
+void Buze();//嗡鸣器滴响一声，参数可在functions.c中调
+void LEDnumber(uint num);//显示十进制数字
+
+#define _DEBUG//调试模式默认开启,但需要打开串口才能正常传输调试数据
